@@ -45,6 +45,28 @@ document
 document
     .querySelector("#async-btn")
     .addEventListener("click", async () => {
+        const response = await fetch (`${API_BASE}/users`);
+        const users = await response.json();
+        let html = "";
+        users.forEach(user => {
+            html += `<div class="card">
+                    <div class="name">${user.name}</div>
+                    <div class="name">${user.email}</div>
+                    </div>`
+        });
+        document.querySelector("#async-grid").innerHTML = html;
+    })
+
+// ────────────────────────────────────────────────
+// ── TODO 3 ──────────────────────────────────────
+// Wrap your TODO 2 code in try { } catch (error) { }
+// In catch:
+//   1. Set #async-status textContent = "Error: " + error.message
+//   2. Set #async-status className = "status error"
+// ────────────────────────────────────────────────
+document
+    .querySelector("#async-btn")
+    .addEventListener("click", async () => {
         try {
             const response = await fetch(`${API_BASE}/users`);
             const users = await response.json();
@@ -60,16 +82,7 @@ document
             document.querySelector("#async-status").textContent = `Error: ${error.message}`;
             document.querySelector("#async-status").className = "status error";
         }
-        })
-
-// ────────────────────────────────────────────────
-// ── TODO 3 ──────────────────────────────────────
-// Wrap your TODO 2 code in try { } catch (error) { }
-// In catch:
-//   1. Set #async-status textContent = "Error: " + error.message
-//   2. Set #async-status className = "status error"
-// ────────────────────────────────────────────────
-
+    })
 
 
 // ────────────────────────────────────────────────
